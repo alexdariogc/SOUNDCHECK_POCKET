@@ -16,13 +16,14 @@ description: Implementa features de Soundcheck Pocket (sonidista virtual): flujo
 - **Referencias individuales primero**, mezcla completa después.
 - **Reglas deterministas** en v1; IA solo si el usuario lo pide explícitamente.
 - Recomendaciones **honestas** (estéreo de consola ≠ control por canal exacto).
+- **Código en inglés**; strings de UI en `src/i18n/` (`t('key')`), copy español en `locales/es.ts`.
 
 ## Checklist por feature
 
 ```
 - [ ] ¿Encaja en el paso 1–6 sin romper el orden?
 - [ ] ¿Persiste datos de sesión necesarios para pasos posteriores?
-- [ ] ¿Mensajes en español claro para músicos?
+- [ ] ¿UI vía i18n (`t()`), sin strings hardcodeados en JSX?
 - [ ] ¿Modo consola/sala/híbrido considerado si aplica?
 - [ ] ¿APIs Expo 55 verificadas en docs?
 ```

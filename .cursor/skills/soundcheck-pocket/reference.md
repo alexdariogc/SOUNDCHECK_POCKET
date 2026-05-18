@@ -1,8 +1,10 @@
 # Referencia — Soundcheck Pocket
 
-## Catálogo de instrumentos
+## Catálogo de instrumentos (ids en código)
 
-`voz` · `coros` · `bajo` · `guitarra` · `teclado` · `bateria_acustica` · `bateria_electronica` · `pistas` · `percusion` · `vientos`
+`voice` · `backing_vocals` · `bass` · `guitar` · `keys` · `acoustic_drums` · `electronic_drums` · `tracks` · `percussion` · `winds`
+
+Labels en `src/i18n/locales/` (`instruments.items.*`).
 
 Cada tipo puede tener umbrales distintos en `rules/` (graves esperados, headroom, prioridad en mezcla).
 

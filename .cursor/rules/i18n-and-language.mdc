@@ -1,0 +1,45 @@
+---
+description: Código en inglés, UI vía i18n (traducciones), comentarios opcionales en español
+alwaysApply: true
+---
+
+# Idioma del código e i18n
+
+## Código (inglés obligatorio)
+
+- Identificadores, archivos, carpetas, tipos, funciones, props y tests: **inglés**.
+- Mensajes de commit y nombres de ramas: **inglés**.
+- **No** hardcodear texto visible al usuario en componentes (`<Text>`, `label`, `placeholder`, `alert`).
+
+## UI (traducciones obligatorias)
+
+- Todo copy de pantalla va en **`src/i18n/`** usando claves en inglés (ej. `instruments.selectTitle`, `calibration.signalTooLow`).
+- En componentes: `useTranslation()` + `t('namespace.key')` (o helper del proyecto).
+- Archivos de locale: `src/i18n/locales/en.ts`, `src/i18n/locales/es.ts` (añadir idiomas ahí).
+- Contenido para músicos en español vive en **`es`**; mantener **`en`** al día para desarrollo y tests.
+- Pluralización / interpolación: claves con `{{name}}`, no concatenar strings en código.
+
+## Comentarios
+
+- **Opcional en español** cuando aclaren dominio de audio, consola o soundcheck.
+- Comentarios que documenten API o tipos: preferir **inglés** si el equipo es mixto.
+
+## Ejemplos
+
+```tsx
+// ❌ Texto de UI en el componente
+<Text>¿Qué instrumentos usarán?</Text>
+
+// ✅ Clave i18n; el español está en locales/es.ts
+<Text>{t('instruments.selectTitle')}</Text>
+```
+
+```ts
+// ✅ Comentario en español (dominio)
+// Orden en que se prueba cada fuente en el paso 3
+instrumentOrder: InstrumentId[];
+```
+
+## Al tocar pantallas existentes
+
+Migrar strings hardcodeados a `src/i18n/` en el mismo PR que modifique esa pantalla.

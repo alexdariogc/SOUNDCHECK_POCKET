@@ -12,6 +12,11 @@
 - Expo SDK **55** — leer [docs Expo v55](https://docs.expo.dev/versions/v55.0.0/) antes de escribir código nativo/Expo.
 - React Native + TypeScript (`strict`).
 
+## Idioma e i18n
+
+- **Código en inglés** (nombres, tipos, lógica). Comentarios en español solo si ayudan con dominio audio/consola.
+- **UI solo vía traducciones** — `src/i18n/`, claves en inglés, copy en `locales/es.ts` / `locales/en.ts`. Ver `.cursor/rules/i18n-and-language.mdc`.
+
 ## Flujo obligatorio de la app
 
 1. Selección de instrumentos → 2. Calibración entrada → 3. Prueba individual → 4. Comparación entre instrumentos → 5. Mezcla completa → 6. Checklist final.

@@ -30,7 +30,12 @@ export function classifyInstantDb(db: number): SignalQuality {
   if (db > DB_HIGH) return 'high';
   if (db >= DB_GOOD_MIN && db <= DB_GOOD_MAX) return 'good';
   if (db < DB_TOO_LOW) return 'tooLow';
+  /** Between “too low” and “good” — still needs more level from the mixer. */
   return 'tooLow';
+}
+
+export function isGoodSignal(signal: SignalQuality): boolean {
+  return signal === 'good';
 }
 
 export function pushMeterSample(samples: number[], db: number, maxLength = NOISE_SAMPLE_WINDOW): number[] {

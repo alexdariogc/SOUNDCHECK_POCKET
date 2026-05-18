@@ -11,7 +11,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "security:audit": "node scripts/security/audit-supply-chain.mjs",
-    "security:deps-audit": "pnpm audit --audit-level high"
+    "security:deps-audit": "pnpm audit --audit-level high",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "pnpm": {
     "overrides": {
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "vitest": "^3.2.4"
   }
 }

@@ -64,6 +64,8 @@ const es = {
     openSettings: 'Abrir ajustes',
     holdGood: 'Mantén este nivel ~{{seconds}} s más…',
     readyToContinue: 'Señal estable. Puedes continuar.',
+    alreadyCompleted:
+      'Ya calibraste en esta sesión. Puedes repetir la escucha o continuar cuando el nivel sea estable.',
     signal: {
       idle: 'Pulsa «Escuchar señal» con la consola conectada.',
       tooLow:

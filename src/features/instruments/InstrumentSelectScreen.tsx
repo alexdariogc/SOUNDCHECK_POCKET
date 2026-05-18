@@ -1,7 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { INSTRUMENT_CATALOG, getInstrument } from '../../domain/instruments';
+import {
+  INSTRUMENT_CATALOG,
+  getInstrument,
+  type InstrumentId,
+} from '../../domain/instruments';
 import { useSoundcheckSession } from '../../session/SoundcheckSessionContext';
 import { PrimaryButton } from '../../ui/components/PrimaryButton';
 import { StepScaffold } from '../../ui/components/StepScaffold';
@@ -60,7 +64,7 @@ export function InstrumentSelectScreen() {
           <Text style={styles.sectionTitle}>{t('instruments.orderSection')}</Text>
           <Text style={styles.sectionHint}>{t('instruments.orderHint')}</Text>
           <View style={styles.orderList}>
-            {state.instrumentOrder.map((id, index) => {
+            {state.instrumentOrder.map((id: InstrumentId, index: number) => {
               const instrument = getInstrument(id);
               const name = t(instrument.labelKey);
               return (

@@ -63,6 +63,8 @@ const en = {
     openSettings: 'Open settings',
     holdGood: 'Hold this level for ~{{seconds}} more seconds…',
     readyToContinue: 'Signal is stable. You can continue.',
+    alreadyCompleted:
+      'Calibration was saved for this session. You can listen again or continue once the level is stable.',
     signal: {
       idle: 'Tap “Listen to signal” with the mixer connected.',
       tooLow: 'Signal is very low. Raise the mixer output a little.',

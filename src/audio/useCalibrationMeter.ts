@@ -6,15 +6,17 @@ import {
 } from 'expo-audio';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { calibrationRecordingOptions } from './calibrationRecordingOptions';
 import {
-  GOOD_SIGNAL_HOLD_MS,
-  pushMeterSample,
-  resolveSignalQuality,
-  type SignalQuality,
-} from './signalQuality';
+  canAdvanceCalibration,
+  computeGoodHeldMs,
+  nextPeakMeteringDb,
+} from './calibrationAdvance';
+import { calibrationRecordingOptions } from './calibrationRecordingOptions';
+import { pushMeterSample, resolveSignalQuality } from './signalQuality';
 
 export type MicPermission = 'unknown' | 'granted' | 'denied';
+
+const INITIAL_PEAK_DB = -160;
 
 export function useCalibrationMeter() {
   const recorder = useAudioRecorder(calibrationRecordingOptions);
@@ -23,6 +25,7 @@ export function useCalibrationMeter() {
   const [listening, setListening] = useState(false);
   const [recentSamples, setRecentSamples] = useState<number[]>([]);
   const [goodSince, setGoodSince] = useState<number | null>(null);
+  const [peakMeteringDb, setPeakMeteringDb] = useState(INITIAL_PEAK_DB);
   const stoppingRef = useRef(false);
 
   const meteringDb = recorderState.metering;
@@ -49,6 +52,7 @@ export function useCalibrationMeter() {
   useEffect(() => {
     if (!listening || meteringDb == null || !Number.isFinite(meteringDb)) return;
     setRecentSamples((prev) => pushMeterSample(prev, meteringDb));
+    setPeakMeteringDb((prev) => nextPeakMeteringDb(prev, meteringDb));
   }, [listening, meteringDb]);
 
   useEffect(() => {
@@ -78,6 +82,7 @@ export function useCalibrationMeter() {
     if (permission !== 'granted') return;
     setRecentSamples([]);
     setGoodSince(null);
+    setPeakMeteringDb(INITIAL_PEAK_DB);
     await recorder.prepareToRecordAsync();
     recorder.record();
     setListening(true);
@@ -89,14 +94,14 @@ export function useCalibrationMeter() {
     };
   }, [stopListening]);
 
-  const goodHeldMs =
-    goodSince != null && signal === 'good' ? Date.now() - goodSince : 0;
-  const canAdvance = listening && signal === 'good' && goodHeldMs >= GOOD_SIGNAL_HOLD_MS;
+  const goodHeldMs = computeGoodHeldMs(goodSince, signal);
+  const canAdvance = canAdvanceCalibration({ listening, signal, goodHeldMs });
 
   return {
     permission,
     listening,
     meteringDb,
+    peakMeteringDb,
     signal,
     canAdvance,
     goodHeldMs,

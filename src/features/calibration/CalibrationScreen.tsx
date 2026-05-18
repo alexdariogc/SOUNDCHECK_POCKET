@@ -2,10 +2,14 @@ import { useEffect, useState } from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import {
+  computeHoldProgress,
+  secondsUntilAdvance,
+} from '../../audio/calibrationAdvance';
 import { useCalibrationMeter } from '../../audio/useCalibrationMeter';
 import type { SignalQuality } from '../../audio/signalQuality';
-import { GOOD_SIGNAL_HOLD_MS } from '../../audio/signalQuality';
 import { useSoundcheckSession } from '../../session/SoundcheckSessionContext';
+import { HoldProgressBar } from '../../ui/components/HoldProgressBar';
 import { LevelMeter } from '../../ui/components/LevelMeter';
 import { PrimaryButton } from '../../ui/components/PrimaryButton';
 import { StepScaffold } from '../../ui/components/StepScaffold';
@@ -22,11 +26,12 @@ const SIGNAL_MESSAGE_KEYS: Record<SignalQuality, `calibration.signal.${SignalQua
 
 export function CalibrationScreen() {
   const { t } = useTranslation();
-  const { goToNextStep, goToPreviousStep } = useSoundcheckSession();
+  const { goToNextStep, goToPreviousStep, completeCalibration, state } = useSoundcheckSession();
   const {
     permission,
     listening,
     meteringDb,
+    peakMeteringDb,
     signal,
     canAdvance,
     goodHeldMs,
@@ -40,10 +45,16 @@ export function CalibrationScreen() {
     return () => clearInterval(id);
   }, [listening, signal]);
 
-  const holdProgress =
-    signal === 'good' && goodHeldMs > 0
-      ? Math.min(1, goodHeldMs / GOOD_SIGNAL_HOLD_MS)
-      : 0;
+  const holdProgress = computeHoldProgress(goodHeldMs, signal);
+  const secondsLeft = secondsUntilAdvance(goodHeldMs, signal);
+
+  const handleContinue = () => {
+    completeCalibration({
+      completedAt: Date.now(),
+      peakMeteringDb,
+    });
+    goToNextStep();
+  };
 
   const openSettings = () => {
     void Linking.openSettings();
@@ -58,7 +69,7 @@ export function CalibrationScreen() {
         <>
           <PrimaryButton
             label={t('common.continue')}
-            onPress={goToNextStep}
+            onPress={handleContinue}
             disabled={!canAdvance}
           />
           <PrimaryButton
@@ -79,6 +90,12 @@ export function CalibrationScreen() {
           </Text>
         ))}
       </View>
+
+      {state.calibration ? (
+        <View style={styles.bannerOk}>
+          <Text style={styles.bannerOkText}>{t('calibration.alreadyCompleted')}</Text>
+        </View>
+      ) : null}
 
       {permission === 'denied' ? (
         <View style={styles.bannerDanger}>
@@ -105,11 +122,12 @@ export function CalibrationScreen() {
       >
         <Text style={styles.statusText}>{t(SIGNAL_MESSAGE_KEYS[signal])}</Text>
         {listening && signal === 'good' && holdProgress < 1 ? (
-          <Text style={styles.holdHint}>
-            {t('calibration.holdGood', {
-              seconds: Math.ceil((GOOD_SIGNAL_HOLD_MS - goodHeldMs) / 1000),
-            })}
-          </Text>
+          <>
+            <Text style={styles.holdHint}>
+              {t('calibration.holdGood', { seconds: secondsLeft })}
+            </Text>
+            <HoldProgressBar progress={holdProgress} />
+          </>
         ) : null}
         {canAdvance ? (
           <Text style={styles.holdHint}>{t('calibration.readyToContinue')}</Text>
@@ -152,6 +170,18 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   sourceItem: {
+    color: colors.textMuted,
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  bannerOk: {
+    backgroundColor: '#122018',
+    borderRadius: 12,
+    padding: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.success,
+  },
+  bannerOkText: {
     color: colors.textMuted,
     fontSize: 14,
     lineHeight: 20,

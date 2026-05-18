@@ -31,13 +31,21 @@ export function stepNumber(step: SoundcheckStep): number {
   return SOUNDCHECK_STEPS.indexOf(step) + 1;
 }
 
+export type CalibrationResult = {
+  completedAt: number;
+  /** Loudest metering sample observed during calibration (dB). */
+  peakMeteringDb: number;
+};
+
 export type SoundcheckSessionState = {
   currentStep: SoundcheckStep;
   /** Test order for step 3+ */
   instrumentOrder: InstrumentId[];
+  calibration: CalibrationResult | null;
 };
 
 export const initialSessionState: SoundcheckSessionState = {
   currentStep: 'instruments',
   instrumentOrder: [],
+  calibration: null,
 };

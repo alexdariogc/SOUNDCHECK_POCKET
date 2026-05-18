@@ -36,5 +36,5 @@ Reglas basadas en señal (RMS, picos, clipping, espectro, umbrales por instrumen
 ## Seguridad (cadena de suministro)
 
 - Antes de cambiar dependencias: `pnpm run security:audit` (ver `docs/SECURITY-SUPPLY-CHAIN.md`).
-- No añadir hooks en `.claude/settings.json` ni `folderOpen` en VS Code tasks sin revisión explícita.
+- No añadir `folderOpen` en VS Code tasks ni hooks de agentes en configs locales sin revisión explícita (ver `docs/SECURITY-SUPPLY-CHAIN.md`).
 - Incidentes de referencia: compromiso **axios** (mar 2026), **Mini Shai-Hulud** en npm/agentic (may 2026).

@@ -22,8 +22,7 @@ Lecturas técnicas: [StepSecurity – TanStack wave](https://www.stepsecurity.io
 | Lockfile obligatorio | `pnpm-lock.yaml` + `.npmrc` |
 | Pin preventivo axios | `package.json` → `pnpm.overrides` |
 | CI en PR/push | `.github/workflows/supply-chain-audit.yml` |
-| Reglas para agentes | `.cursor/rules/supply-chain-security.mdc`, `package-manager.mdc` |
-| Plantilla Claude segura | `.claude/settings.json.example` |
+| Reglas para agentes | `AGENTS.md`, `.cursor/rules/supply-chain-security.mdc`, `package-manager.mdc` |
 
 ## Si estuviste expuesto
 

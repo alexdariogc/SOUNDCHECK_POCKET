@@ -16,9 +16,8 @@ Incidentes recientes: **axios/plain-crypto-js** (mar 2026), **Mini Shai-Hulud** 
 
 ## Configs de agentes (NO automatizar sin revisión humana)
 
-- **No** agregar `hooks.SessionStart` ni otros hooks en `.claude/settings.json` salvo petición explícita del usuario y revisión de seguridad.
 - **No** crear `.vscode/tasks.json` con `runOn: folderOpen`.
-- Solo plugins Claude allowlisted (`expo@claude-plugins-official`); documentar cualquier otro.
+- Si usas Claude Code u otro agente en local: no commitear `.claude/settings.json` con hooks no revisados (ver incidente Mini Shai-Hulud en `docs/SECURITY-SUPPLY-CHAIN.md`).
 - Nunca commitear secretos en skills, rules o settings.
 
 ## Si el usuario pide instalar paquetes

@@ -1,0 +1,18 @@
+---
+description: Flujo de 6 pasos del soundcheck guiado (pantallas y estado de sesión)
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Flujo de soundcheck
+
+Implementar y extender siguiendo este orden:
+
+1. **Instrumentos** — usuario elige del catálogo (voz, coros, bajo, guitarra, teclado, baterías, pistas, percusión, vientos); la sesión se personaliza.
+2. **Calibración** — consola → teléfono (REC/AUX/MONITOR/MAIN controlado); validar señal usable antes de pruebas.
+3. **Individual** — un instrumento por vez con prompt temporal (ej. 10 s voz al máximo); guardar referencia (nivel, picos, clipping, graves/agudos, claridad).
+4. **Comparación** — contrastar referencias entre sí antes del full band.
+5. **Banda completa** — sección representativa intensa (ej. 30 s); comparar con referencias individuales.
+6. **Checklist** — resumen por ítem + recomendaciones numeradas y priorizadas.
+
+Estado de sesión debe conservar referencias por instrumento hasta el paso 5–6. Ver `docs/PRODUCT.md`.

@@ -1,0 +1,12 @@
+---
+description: Expo SDK 55 — consultar docs versionadas antes de código Expo/RN
+alwaysApply: true
+---
+
+# Expo SDK 55
+
+Antes de añadir dependencias Expo, plugins, permisos de micrófono/audio o APIs nativas:
+
+1. Confirmar en https://docs.expo.dev/versions/v55.0.0/
+2. No asumir APIs de SDK 54 o anteriores (`expo-av` vs `expo-audio`, etc.).
+3. Alinear `package.json` y `app.json` con la guía v55 del paquete usado.

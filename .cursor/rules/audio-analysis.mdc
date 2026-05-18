@@ -1,0 +1,19 @@
+---
+description: Captura de audio, modos consola/sala/híbrido y análisis de señal (MVP)
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Audio y análisis (MVP)
+
+**v1:** reglas deterministas — RMS/nivel, picos, clipping, espectro básico, umbrales por tipo de instrumento. Sin IA como requisito.
+
+**Modos:** consola (salida mixer, señal limpia), sala (micrófono en público), híbrido (consola primero, validación en sala). Exponer limitaciones de cada modo en UI.
+
+**Calibración:** detectar señal baja/alta, clipping, ruido, saturación de entrada del teléfono; guiar a bajar subir salida de consola.
+
+**Individual vs full:** referencias solo con una fuente sonando; mezcla completa compara contra esas referencias para atribuir (ej. graves de bajo + teclado).
+
+**Hardware:** documentar en app cable/adaptador/interfaz; advertir saturación de entrada móvil. Portable — sin depender de laptop.
+
+Expo 55: usar APIs documentadas en https://docs.expo.dev/versions/v55.0.0/ para permisos y captura.

@@ -1,0 +1,15 @@
+---
+description: Tono y formato de mensajes y recomendaciones al músico
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Copy y recomendaciones
+
+- Español claro, sin jerga de DSP innecesaria; acciones en consola (“baja graves del teclado”, “activa HPF en voz”).
+- **Sí:** “El bajo quedó más fuerte que la voz en la prueba; baja el canal de bajo o sube un poco la voz.”
+- **No:** “Baja exactamente 3 dB el canal 5” (no hay multicanal en MVP estéreo).
+- En mezcla completa, citar **candidatos** según pruebas individuales y orden de prueba (“primero teclado, si sigue pesado, bajo”).
+- Checklist final: ítems con estado (OK / revisar / riesgo) + lista numerada de acciones; incluir entrada teléfono, master, por instrumento, mezcla, voz entendible, riesgo feedback cuando aplique.
+
+Plantillas: `.cursor/skills/soundcheck-pocket/reference.md`.

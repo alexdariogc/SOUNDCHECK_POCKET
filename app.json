@@ -1,27 +1,27 @@
 {
   "expo": {
-    "name": "soundcheck-pocket",
+    "name": "Soundcheck Pocket",
     "slug": "soundcheck-pocket",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0c0f14",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.anonymous.soundcheckpocket"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,9 +29,18 @@
     "plugins": [
       "expo-localization",
       [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ],
+      [
         "expo-audio",
         {
-          "microphonePermission": "Necesitamos el micrófono para medir la señal de la consola durante la prueba de sonido.",
+          "microphonePermission": "Necesitamos capturar audio por jack 3,5 mm o USB-C para medir la señal de la consola. No usamos el micrófono interno del teléfono.",
           "recordAudioAndroid": true,
           "enableBackgroundRecording": false,
           "enableBackgroundPlayback": false

@@ -1,3 +1,6 @@
+// Expo winter runtime expects RN globals (FormData, performance, fetch, …) before it loads.
+import 'react-native/Libraries/Core/InitializeCore';
+
 import { registerRootComponent } from 'expo';
 
 import './src/i18n';

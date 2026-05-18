@@ -44,10 +44,10 @@ const en = {
   calibration: {
     title: 'Input calibration',
     subtitle:
-      'Connect a mixer output to the phone. We will check level, clipping, and noise before tests.',
+      'Connect the mixer only via 3.5 mm TRRS jack or USB-C interface. We do not use the phone microphone.',
     connectionTitle: 'Recommended connection',
     connectionBody:
-      'Use a cable or interface that will not clip the phone input. Start with low mixer level and raise slowly.',
+      'Connect the mixer output to the TRRS jack (3.5 mm) or a USB-C interface. Use a cable that will not clip the input. Start with low mixer level and raise slowly.',
     sources: {
       recOut: 'REC OUT / record bus',
       auxOut: 'AUX OUT (controlled level)',
@@ -55,18 +55,56 @@ const en = {
       mainOut: 'MAIN OUT (careful — often very hot)',
     },
     meterTitle: 'Input level',
+    listening: 'Listening… Send audio from the mixer.',
     startListening: 'Listen to signal',
     stopListening: 'Stop',
-    startHint: 'Send audio from the mixer (pink noise, soft playback, or one instrument) while we listen.',
-    requestingPermission: 'Requesting microphone access…',
-    permissionDenied: 'Microphone access is required to measure the signal. Enable it in system settings.',
+    startHint:
+      'With the cable or interface connected, send audio from the mixer (pink noise, soft playback, or one instrument).',
+    checkConnection: 'Check connection',
+    checkingConnection: 'Checking inputs reported by the phone…',
+    verifyingSilence: 'Step 1: measuring ~3 s. Laptop silent — no music or pink noise.',
+    verifyingSignal: 'Step 2: measuring ~3 s. Play pink noise from the laptop.',
+    externalInputRequired:
+      'Connect the mixer to the 3.5 mm TRRS jack or a USB-C audio interface. This app does not use the phone microphone.',
+    prepTitle: 'Before calibrating (important on Android)',
+    prepBody:
+      'The phone may still listen through its built-in mic even with a cable plugged in. Isolate it before measuring the mixer.',
+    prepMuteSteps:
+      '· Do not revoke microphone permission for Soundcheck Pocket (the app stops measuring).\n· On MIUI/HyperOS: Privacy → Microphone — restrict other apps if you want; this app must keep access.\n· Optional: cover the phone mic holes with tape while calibrating.\n· Jack: a TRS cable (2 rings) is not enough — line→mic TRRS adapter (3 rings on the phone) or a USB-C audio interface.',
+    prepUsbNote:
+      'A PC↔phone USB data/charge cable does not feed the computer’s audio into the app. Use a USB audio dongle or interface plugged into the phone, with the mixer fed into its input (jack or line).',
+    prepTapTest:
+      'Tap “Listen to signal” below. With the mixer silent, tap lightly near the phone mic: if the bars bounce in sync, the internal mic is still in the path — fix cable/adapter before step 1.',
+    prepConfirm:
+      'I confirm: with the mixer silent the meter does not react to taps on the phone (only to the mixer when I send audio).',
+    prepRequired: 'Check the box above to enable verification.',
+    androidVerifyIntro:
+      'Step 1: mixer/laptop silent. Step 2: play pink noise. If the meter moves during silence, it is usually the phone mic, not the jack.',
+    verifySilence: '1. Verify silence (no audio)',
+    verifySignal: '2. Verify signal (pink noise on)',
+    silenceOk: 'Silence OK. Play pink noise from the mixer/laptop, then tap step 2.',
+    silenceNoMetering:
+      'No level readings during the test. Check the USB-C dongle, cabling, and microphone permission, then retry step 1.',
+    silenceFailed:
+      'Step 1 failed: too much level or variation with the laptop silent. Not a quiet line on the jack — usually the phone mic, TRRS wiring without signal on the mic pin, missing line→mic adapter, or the OS (MIUI) not routing to the connector.',
+    silenceFailedMetrics:
+      'Measured: peak {{peak}} dB, variation {{stdDev}} dB. Silence should stay below {{maxPeak}} dB and vary less than {{maxStdDev}} dB.',
+    signalFailed:
+      'Level did not rise enough when playing pink noise. Raise mixer/laptop volume and retry step 2.',
+    meterWithoutSourceHint:
+      'If the meter moves with no mixer audio, do not calibrate — that is mic or noise, not line signal.',
+    devicesSeen: 'Inputs reported by the phone: {{list}}',
+    requestingPermission: 'Requesting audio access…',
+    permissionDenied:
+      'Audio access is required to measure the signal. Enable it in system settings.',
+    inputActive: 'Console input: {{name}}',
     openSettings: 'Open settings',
     holdGood: 'Hold this level for ~{{seconds}} more seconds…',
     readyToContinue: 'Signal is stable. You can continue.',
     alreadyCompleted:
       'Calibration was saved for this session. You can listen again or continue once the level is stable.',
     signal: {
-      idle: 'Tap “Listen to signal” with the mixer connected.',
+      idle: 'Connect jack or USB and tap “Check connection” if needed. Then “Listen to signal”.',
       tooLow: 'Signal is very low. Raise the mixer output a little.',
       good: 'Level looks good. Hold it steady for a few seconds.',
       high: 'Signal is hot. Lower the mixer output a bit.',

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     opacity: 0.88,
   },
   label: {
-    color: '#1a1206',
+    color: colors.onAccent,
     fontSize: 17,
     fontWeight: '700',
   },

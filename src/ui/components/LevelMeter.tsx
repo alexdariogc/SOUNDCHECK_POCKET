@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   segmentLit: {
-    backgroundColor: colors.success,
+    backgroundColor: colors.meterFill,
   },
   segmentHot: {
-    backgroundColor: colors.danger,
+    backgroundColor: colors.meterHot,
   },
 });

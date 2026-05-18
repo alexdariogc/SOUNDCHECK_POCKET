@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   fill: {
     height: '100%',
-    backgroundColor: colors.success,
+    backgroundColor: colors.accent,
     borderRadius: 3,
   },
 });

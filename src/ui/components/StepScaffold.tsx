@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { stepNumber, STEP_LABEL_KEYS, type SoundcheckStep } from '../../domain/types';
+import { AppIcon } from './AppIcon';
 import { colors, spacing } from '../theme';
 
 type Props = {
@@ -21,15 +22,20 @@ export function StepScaffold({ step, title, subtitle, children, footer }: Props)
   return (
     <View style={[styles.root, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
       <View style={styles.header}>
-        <Text style={styles.stepBadge}>
-          {t('steps.badge', {
-            current: stepNumber(step),
-            total: 6,
-            name: t(STEP_LABEL_KEYS[step]),
-          })}
-        </Text>
-        <Text style={styles.title}>{title}</Text>
-        {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+        <View style={styles.brandRow}>
+          <AppIcon size={48} />
+          <View style={styles.headerText}>
+            <Text style={styles.stepBadge}>
+              {t('steps.badge', {
+                current: stepNumber(step),
+                total: 6,
+                name: t(STEP_LABEL_KEYS[step]),
+              })}
+            </Text>
+            <Text style={styles.title}>{title}</Text>
+            {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+          </View>
+        </View>
       </View>
 
       <ScrollView
@@ -54,6 +60,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,
     paddingBottom: spacing.sm,
+  },
+  brandRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.md,
+  },
+  headerText: {
+    flex: 1,
     gap: spacing.sm,
   },
   stepBadge: {

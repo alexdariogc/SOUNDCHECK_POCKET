@@ -1,0 +1,41 @@
+{
+  "description": "Known-malicious npm versions and IOCs. Overlays: blocklist.*.json (e.g. StepSecurity May 2026).",
+  "sources": [
+    {
+      "name": "StepSecurity — Mini Shai-Hulud @tanstack / @uipath",
+      "file": "blocklist.stepsecurity-2026-05.json",
+      "url": "https://www.stepsecurity.io/blog/mini-shai-hulud-is-back-a-self-spreading-supply-chain-attack-hits-the-npm-ecosystem"
+    },
+    {
+      "name": "StepSecurity OSS feed (updates)",
+      "url": "https://app.stepsecurity.io/oss-security-feed"
+    }
+  ],
+  "maliciousVersions": {
+    "plain-crypto-js": ["4.2.1"],
+    "axios": ["1.14.1", "0.30.4"],
+    "@mistralai/mistralai": ["2.2.3", "2.2.4"],
+    "@opensearch-project/opensearch": ["3.6.2"],
+    "mbt": ["1.2.48"],
+    "@cap-js/sqlite": ["2.2.2"],
+    "@cap-js/postgres": ["2.2.2"],
+    "@cap-js/db-service": ["2.10.1"]
+  },
+  "maliciousPackagePrefixes": ["@tanstack/", "@uipath/", "@draftlab/"],
+  "suspiciousPackages": ["plain-crypto-js"],
+  "iocDomains": ["sfrclak.com", "142.11.206.73", "git-tanstack.com"],
+  "suspiciousPathFragments": [
+    "node_modules/plain-crypto-js",
+    "com.apple.act.mond",
+    "execution.js",
+    "opensearch_init.js",
+    ".vscode/setup.mjs"
+  ],
+  "claude": {
+    "forbiddenHookKeys": ["SessionStart", "SessionEnd", "PreToolUse", "PostToolUse"],
+    "allowedPluginPrefixes": ["expo@claude-plugins-official"]
+  },
+  "vscode": {
+    "forbiddenTaskRunOn": ["folderOpen"]
+  }
+}

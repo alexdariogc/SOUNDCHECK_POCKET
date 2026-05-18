@@ -1,0 +1,17 @@
+---
+description: Gestor de paquetes pnpm obligatorio (no npm ni yarn)
+alwaysApply: true
+---
+
+# pnpm
+
+Este proyecto usa **pnpm** exclusivamente (`packageManager` en `package.json`).
+
+- Instalar: `pnpm install` (tras `corepack enable` si hace falta).
+- CI: `pnpm install --frozen-lockfile`.
+- Lockfile: `pnpm-lock.yaml` — no crear `package-lock.json` ni `yarn.lock`.
+- Scripts: `pnpm run <script>` o `pnpm <script>` (ej. `pnpm start`, `pnpm run security:audit`).
+- Añadir deps: `pnpm add <pkg>`, dev: `pnpm add -D <pkg>`.
+- Overrides de seguridad: `pnpm.overrides` en `package.json`.
+
+`npm install` / `yarn` fallan por `preinstall` (`scripts/ensure-pnpm.mjs`).

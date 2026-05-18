@@ -1,0 +1,26 @@
+---
+description: Controles cadena de suministro npm y configs de agentes (axios, Mini Shai-Hulud)
+alwaysApply: true
+---
+
+# Supply chain & agent config security
+
+Incidentes recientes: **axios/plain-crypto-js** (mar 2026), **Mini Shai-Hulud** en npm + persistencia en `.claude/settings.json` / `.vscode/tasks.json` (may 2026). Ver `docs/SECURITY-SUPPLY-CHAIN.md`.
+
+## Antes de añadir dependencias npm
+
+1. Ejecutar / asegurar `pnpm run security:audit` en CI.
+2. Commitear cambios de `pnpm-lock.yaml`; evitar rangos `^` innecesarios en deps sensibles.
+3. No añadir `axios@1.14.1`, `0.30.4` ni `plain-crypto-js`; respetar `pnpm.overrides` en `package.json`.
+4. Desconfiar de parches npm inesperados en `@tanstack/*`, `@uipath/*`, `@mistralai/*` sin advisory oficial.
+
+## Configs de agentes (NO automatizar sin revisión humana)
+
+- **No** agregar `hooks.SessionStart` ni otros hooks en `.claude/settings.json` salvo petición explícita del usuario y revisión de seguridad.
+- **No** crear `.vscode/tasks.json` con `runOn: folderOpen`.
+- Solo plugins Claude allowlisted (`expo@claude-plugins-official`); documentar cualquier otro.
+- Nunca commitear secretos en skills, rules o settings.
+
+## Si el usuario pide instalar paquetes
+
+Preferir versiones fijadas; tras cambios en lockfile, mencionar `pnpm run security:audit`. Usar solo `pnpm add` / `pnpm install`.

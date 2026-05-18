@@ -8,6 +8,7 @@
 
 ## Stack
 
+- **pnpm** — único gestor de paquetes (`pnpm-lock.yaml`). No usar npm/yarn.
 - Expo SDK **55** — leer [docs Expo v55](https://docs.expo.dev/versions/v55.0.0/) antes de escribir código nativo/Expo.
 - React Native + TypeScript (`strict`).
 
@@ -26,3 +27,9 @@ No implementar features que salten pasos sin justificación explícita del usuar
 ## MVP v1
 
 Reglas basadas en señal (RMS, picos, clipping, espectro, umbrales por instrumento). IA avanzada es **post-MVP** salvo que el usuario pida lo contrario.
+
+## Seguridad (cadena de suministro)
+
+- Antes de cambiar dependencias: `pnpm run security:audit` (ver `docs/SECURITY-SUPPLY-CHAIN.md`).
+- No añadir hooks en `.claude/settings.json` ni `folderOpen` en VS Code tasks sin revisión explícita.
+- Incidentes de referencia: compromiso **axios** (mar 2026), **Mini Shai-Hulud** en npm/agentic (may 2026).
